@@ -8,7 +8,7 @@ namespace thekaushikls
 {
     public partial class Uniclock : Form
     {
-        private const int W_RADIUS = 38;
+        private const int W_RADIUS = 15;
 
         private readonly Timer timer;
         private string _lastDisplayedMinute = "";
@@ -41,7 +41,6 @@ namespace thekaushikls
 
         private void InitializeDisplay()
         {
-
             timeLabel.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             creditsLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
 
@@ -51,17 +50,20 @@ namespace thekaushikls
 
         private void SetRoundedRegion(int radius)
         {
-            var path = new GraphicsPath();
-            int w = this.Width;
-            int h = this.Height;
+            if (radius > 0)
+            {
+                var path = new GraphicsPath();
+                int w = this.Width;
+                int h = this.Height;
 
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(w - radius, 0, radius, radius, 270, 90);
-            path.AddArc(w - radius, h - radius, radius, radius, 0, 90);
-            path.AddArc(0, h - radius, radius, radius, 90, 90);
-            path.CloseAllFigures();
+                path.AddArc(0, 0, radius, radius, 180, 90);
+                path.AddArc(w - radius, 0, radius, radius, 270, 90);
+                path.AddArc(w - radius, h - radius, radius, radius, 0, 90);
+                path.AddArc(0, h - radius, radius, radius, 90, 90);
+                path.CloseAllFigures();
 
-            this.Region = new Region(path);
+                this.Region = new Region(path);
+            }            
         }
 
         private void OnMouseDown(object sender, MouseEventArgs e)

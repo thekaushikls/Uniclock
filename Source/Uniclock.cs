@@ -8,7 +8,7 @@ namespace thekaushikls
 {
     public partial class Uniclock : Form
     {
-        private const int W_RADIUS = 15;
+        private const int W_RADIUS = 30;
 
         private readonly Timer timer;
         private string _lastDisplayedMinute = "";
@@ -42,10 +42,10 @@ namespace thekaushikls
         private void InitializeDisplay()
         {
             timeLabel.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
-            creditsLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
+            dayLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
 
             timeLabel.MouseDown += OnMouseDown;
-            creditsLabel.MouseDown += OnMouseDown;
+            dayLabel.MouseDown += OnMouseDown;
         }
 
         private void SetRoundedRegion(int radius)
@@ -84,9 +84,11 @@ namespace thekaushikls
         {
             // Format: hours and minutes, 12-hour clock with AM/PM
             string now = DateTime.Now.ToString("hh:mm tt");
+            string today = DateTime.Now.DayOfWeek.ToString().ToUpper();
             if (now != _lastDisplayedMinute) // Update only if the minute changed
             {
                 timeLabel.Text = now;
+                dayLabel.Text = today;
                 _lastDisplayedMinute = now;
             }
         }
